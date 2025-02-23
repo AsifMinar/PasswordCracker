@@ -27,6 +27,6 @@ def brute_force_crack(target_hash):
         for guess in itertools.product(letters, repeat=length):
             password = ''.join(guess)  
             if make_md5_hash(password) == target_hash:
-                return password  # Found it!
+                return password 
     return None 
     
