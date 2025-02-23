@@ -28,5 +28,5 @@ def brute_force_crack(target_hash):
             password = ''.join(guess)  
             if make_md5_hash(password) == target_hash:
                 return password  # Found it!
-    return None  # Didn’t find it
+    return None 
     
