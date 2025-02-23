@@ -1,4 +1,4 @@
-#step 1
+'''#step 1
 
 import hashlib
 
@@ -6,11 +6,11 @@ def make_md5_hash(password):
     hash_object = hashlib.md5(password.encode())
     return hash_object.hexdigest()
 
-test_password = "password"
+test_password = "test"
 hashed = make_md5_hash(test_password)
 print("password is: ", test_password)
 print("MD5 hash of password is: ", hashed)
-
+'''
 #step 2
 
 import hashlib
@@ -30,3 +30,7 @@ def brute_force_crack(target_hash):
                 return password 
     return None 
     
+target = "098f6bcd4621d373cade4e832627b4f6" 
+print("Target Hash:", target)
+result = brute_force_crack(target)
+print("Cracked Password:", result)
