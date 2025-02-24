@@ -63,7 +63,6 @@ target = "482c811da5d5b4bc6d497ffa98491e38"  # Hash for "password123"
 result = word_list_crack(target, "wordlist.txt")
 print("Cracked Password: ", result)
 
-'''
 
 
 #step 4
@@ -91,5 +90,41 @@ def build_rainbow_table(file_path):
 # Test it
 table = build_rainbow_table("wordlist.txt")
 print(f"Rainbow Table has {len(table)} entries")
+
+
+
+'''
+
+#step 5
+
+
+import hashlib
+
+def make_md5_hash(password):
+    return hashlib.md5(password.encode()).hexdigest()
+
+def build_rainbow_table(file_path):
+    table = {}
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                password = line.strip()
+                hash_value = make_md5_hash(password)
+                table[hash_value] = password
+        return table
+    except FileNotFoundError:
+        print("File not found!")
+        return {}
+
+def rainbow_crack(target_hash, table):
+    # Look up the hash in the table
+    return table.get(target_hash)  # Returns password or None if not found
+
+# Test it
+target = "482c811da5d5b4bc6d497ffa98491e38"  # Hash for "password123"
+table = build_rainbow_table("wordlist.txt")
+result = rainbow_crack(target, table)
+print(f"Target Hash: {target}")
+print(f"Cracked Password: {result}")
 
 
