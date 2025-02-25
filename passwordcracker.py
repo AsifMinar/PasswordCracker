@@ -93,7 +93,7 @@ print(f"Rainbow Table has {len(table)} entries")
 
 
 
-'''
+
 
 #step 5
 
@@ -127,4 +127,28 @@ result = rainbow_crack(target, table)
 print(f"Target Hash: {target}")
 print(f"Cracked Password: {result}")
 
+
+'''
+
+#step 6
+
+import hashlib
+
+def make_hash(password, hash_type="md5"):
+    # Makes a hash with the type you choose
+    if hash_type == "md5":
+        return hashlib.md5(password.encode()).hexdigest()
+    elif hash_type == "sha1":
+        return hashlib.sha1(password.encode()).hexdigest()
+    elif hash_type == "sha256":
+        return hashlib.sha256(password.encode()).hexdigest()
+    else:
+        print("Wrong hash type! Use md5, sha1, or sha256.")
+        return None
+
+# Test it
+password = "password"
+print(f"MD5: {make_hash(password, 'md5')}")
+print(f"SHA-1: {make_hash(password, 'sha1')}")
+print(f"SHA-256: {make_hash(password, 'sha256')}")
 
