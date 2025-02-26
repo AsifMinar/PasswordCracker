@@ -128,7 +128,7 @@ print(f"Target Hash: {target}")
 print(f"Cracked Password: {result}")
 
 
-'''
+
 
 #step 6
 
@@ -151,4 +151,88 @@ password = "password"
 print(f"MD5: {make_hash(password, 'md5')}")
 print(f"SHA-1: {make_hash(password, 'sha1')}")
 print(f"SHA-256: {make_hash(password, 'sha256')}")
+
+'''
+
+import hashlib
+import itertools
+import string
+
+def make_hash(password, hash_type="1"):
+    if hash_type == "1":
+        return hashlib.md5(password.encode()).hexdigest()
+    elif hash_type == "2":
+        return hashlib.sha1(password.encode()).hexdigest()
+    elif hash_type == "3":
+        return hashlib.sha256(password.encode()).hexdigest()
+    else:
+        print("Please type '1' for md5, '2' for sha1, '3' for  sha256!")
+        return None
+
+def brute_force_crack(target_hash, hash_type):
+    letters = string.ascii_lowercase
+    for length in range(1, 5):
+        for guess in itertools.product(letters, repeat=length):
+            password = ''.join(guess)
+            if make_hash(password, hash_type) == target_hash:
+                return password
+    return None
+
+def word_list_crack(target_hash, file_path, hash_type):
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                password = line.strip()
+                if make_hash(password, hash_type) == target_hash:
+                    return password
+        return None
+    except FileNotFoundError:
+        print("File not found!")
+        return None
+
+def build_rainbow_table(file_path, hash_type):
+    table = {}
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                password = line.strip()
+                hash_value = make_hash(password, hash_type)
+                table[hash_value] = password
+        return table
+    except FileNotFoundError:
+        print("File not found!")
+        return {}
+
+def rainbow_crack(target_hash, table):
+    return table.get(target_hash)
+
+# Menu
+print("Welcome to Password Cracker!")
+print("1. Brute Force")
+print("2. Word List")
+print("3. Rainbow Table")
+choice = input("Pick to type--->\n 1 \n 2 \n 3: ")
+hash_type = input("Hash type---> \n '1' for md5, \n '2' for sha1, \n '3' for sha256: ").lower()
+target_hash = input("Enter the hash to crack: ")
+
+if choice == "1":
+    result = brute_force_crack(target_hash, hash_type)
+elif choice == "2":
+    file_path = input("Path to wordlist.txt: ")
+    result = word_list_crack(target_hash, file_path, hash_type)
+elif choice == "3":
+    file_path = input("Path to wordlist.txt for rainbow table: ")
+    table = build_rainbow_table(file_path, hash_type)
+    result = rainbow_crack(target_hash, table)
+else:
+    print("Bad choice!")
+    result = None
+
+if result:
+    print(f"Password found: {result}")
+else:
+    print("Couldn’t crack it!")
+    
+   
+
 
