@@ -231,9 +231,7 @@ else:
 if result:
     print(f"Password found: {result}")
 else:
-    print("Couldn’t crack it!")
-    
-        
+    print("Couldn’t crack it!")       
    
 
 
