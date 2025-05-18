@@ -2,7 +2,6 @@
 
 A Python-based password cracking tool designed to demonstrate various password cracking techniques, including MD5 hashing, brute force attacks, wordlist-based attacks, and rainbow table generation and lookup. This project explores password security concepts for educational purposes.
 
-.“
 
 ## Table of Contents
 - [Overview](#overview)
