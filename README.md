@@ -12,7 +12,6 @@ A Python-based password cracking tool designed to demonstrate various password c
 - [Project Structure](#project-structure)
 - [Limitations](#limitations)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 This project implements a password cracker in Python to illustrate password hashing and cracking techniques. It supports MD5 hashing, brute force cracking of short passwords, wordlist-based attacks using a provided wordlist, and rainbow table generation and lookup for efficient hash cracking.
